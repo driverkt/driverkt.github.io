@@ -47,10 +47,6 @@
     }
   </style>
 
-  <script type="text/javascript">
-    document.getElementById("copyrightyear").innerHTML = new Date().getFullYear();
-  </script>
-
 </head>
 
 <body class="d-flex h-100 text-center">
@@ -87,7 +83,7 @@
     </main>
 
     <footer class="mb-auto">
-      <p>&copy; <span id="copyrightyear"></span> <a href="https://github.com/driverkt">@driverkt</a>. Based upon <a
+      <p>&copy; <script type="text/javascript">document.write(new Date().getFullYear());</script> <a href="https://github.com/driverkt">@driverkt</a>. Based upon <a
           href="https://getbootstrap.com/docs/5.0/examples/cover/">Cover</a>.</p>
     </footer>
 
