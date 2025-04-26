@@ -2,4 +2,7 @@
 
 body {
     font-family: Mulish;
+    padding: 1em;
+    padding: 1lh;
+    text-wrap: pretty;
 }
