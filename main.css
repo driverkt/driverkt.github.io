@@ -2,6 +2,9 @@
 
 body {
     font-family: Mulish;
+}
+
+div.cover-container.main {
     padding: 1em;
     padding: 1lh;
     text-wrap: pretty;
