@@ -1,3 +1,3 @@
 # driverkt.github.io
 
-Based upon [hyde](http://hyde.getpoole.com/).
+Based upon [Hyde](http://hyde.getpoole.com/).
