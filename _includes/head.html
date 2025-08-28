@@ -8,7 +8,7 @@
 
   <title>
     {% if page.title == "Home" %}
-    {{ site.title }} &middot; {{ site.tagline }}
+    {{ site.title }}
     {% else %}
     {{ page.title }} &middot; {{ site.title }}
     {% endif %}
@@ -46,6 +46,10 @@
       border-radius: 0.2em;
       vertical-align: middle;
       text-align: center;
+    }
+    .list-inline-item {
+      min-width: 2em;
+      width: 2em;
     }
   </style>
 
