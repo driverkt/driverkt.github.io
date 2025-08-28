@@ -1,0 +1,26 @@
+# Dependencies
+markdown: redcarpet
+highlighter: pygments
+
+# Permalinks
+permalink: pretty
+relative_permalinks: true
+
+# Setup
+title: driverkt.github.io
+tagline: ""
+description: ""
+url: https://driverkt.github.io
+baseurl: /
+
+author:
+  name: "Kevin Driver"
+  url: https://github.com/driverkt
+
+paginate: 5
+
+# Custom vars
+version: 2.1.0
+
+github:
+  repo: https://github.com/poole/hyde
