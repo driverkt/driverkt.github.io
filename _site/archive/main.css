@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100&family=Quicksand&family=Mulish&display=swap');
+
+body {
+    font-family: Mulish;
+}
+
+main p {
+    padding: 1em;
+    padding: 1lh;
+    text-wrap: pretty;
+}
