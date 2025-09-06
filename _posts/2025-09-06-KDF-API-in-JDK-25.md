@@ -6,7 +6,7 @@ categories:
 tags: ["Professional", "Java"]
 ---
 
-JDK 25 is [scheduled to GA very soon](https://openjdk.org/projects/jdk/25/). When it is released, KDF will officially join the rest of the JCE APIs, via [JEP 510](https://openjdk.org/jeps/510) (a minimal revision of [JEP 478](https://openjdk.org/jeps/478)).
+JDK 25 is [scheduled to GA very soon](https://openjdk.org/projects/jdk/25/). When it is released, the KDF API will officially join the rest of the JCE APIs, via [JEP 510](https://openjdk.org/jeps/510) (a minimal revision of [JEP 478](https://openjdk.org/jeps/478)).
 
 KDF brings another of the critical building-blocks enabling post-quantum cryptography support in the Java programming language. 
 
