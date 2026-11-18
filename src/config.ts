@@ -3,7 +3,7 @@ export const site = {
   title: "Notebook",
   author: "Kevin Driver",
   role: "Cryptography and Key Management",
-  affiliation: "IBM Hashicorp Vault Arc",
+  affiliation: "IBM HashiCorp Vault Arc",
   description: "Essays, photographs and notes by Kevin Driver, a security architect working on cryptography and key management.",
   // Shown on the home page only when set.
   email: "",

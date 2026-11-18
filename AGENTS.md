@@ -133,7 +133,7 @@ These are the parts most likely to need porting on an Astro upgrade.
   "Currently" or "Upcoming" sections.
 - Don't bring in more of the owner's old Tumblr theme (e.g. its polaroid,
   tilted photo frames) without asking.
-- Hosting stays on GitHub Pages (`The owner.github.io`, deployed by
+- Hosting stays on GitHub Pages (The `driverkt.github.io`, deployed by
   `.github/workflows/deploy.yml`). `site` in `astro.config.mjs` changes
   when a custom domain is chosen.
 
