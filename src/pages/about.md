@@ -16,7 +16,7 @@ I'm Kevin Driver, a security architect and engineer. For more than twenty years 
 Cryptography (including, but not limited to, post-quantum migration), key management, security, and privacy; PCI and payment security; natural language processing.
 
 - Patent: [US7499550B2 &mdash; System and method for protecting a title key in a secure distribution system for recordable media content](https://patents.google.com/patent/US7499550B2/), also granted in China.
-- Paper: *Natural Language Processing for First Order Logic Problems*, a novel application of MIT's [Alloy modeling language](https://www.csail.mit.edu/research/alloy).
+- Paper: *Natural Language Processing for First Order Logic Problems*, a novel application of MIT's [Alloy modeling language](https://alloytools.org).
 
 ## Personal Interests
 
