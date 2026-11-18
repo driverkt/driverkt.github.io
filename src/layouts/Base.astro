@@ -1,0 +1,86 @@
+---
+import "../styles/typeset.css";
+import "../styles/fonts.css";
+import "../styles/site.css";
+import Nav from "../components/Nav.astro";
+import { site } from "../config";
+import { url } from "../lib/format";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** The page shows code: load MonoLisa Code and the copy buttons. */
+  code?: boolean;
+}
+
+const { title, description = site.description, code = false } = Astro.props;
+const fullTitle = title ? `${title} · ${site.title}` : `${site.title} · ${site.author}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const year = new Date().getUTCFullYear();
+const fonts = [url("/fonts/monolisa-text.css"), ...(code ? [url("/fonts/monolisa-code.css")] : [])];
+
+// Chromium prerenders a same-site link once the pointer rests on it, so
+// the next page is ready on click. Other browsers ignore this.
+const speculation = { prerender: [{ where: { href_matches: `${url("/")}*` }, eagerness: "moderate" }] };
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url("/favicon.ico")} />
+    <link rel="apple-touch-icon" href={url("/apple-touch-icon.png")} />
+    <link rel="alternate" type="application/rss+xml" title={site.title} href={url("/rss.xml")} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <!-- MonoLisa: each stylesheet carries its fonts inline (about 400 KB
+         compressed), so it is fetched early but applied without blocking the
+         page. Text shows at once in a size-matched fallback, then switches. -->
+    {fonts.map((href) => <link rel="preload" as="style" href={href} onload="this.onload=null;this.rel='stylesheet'" />)}
+    <noscript>{fonts.map((href) => <link rel="stylesheet" href={href} />)}</noscript>
+    <script is:inline type="speculationrules" set:html={JSON.stringify(speculation)} />
+  </head>
+  <body>
+    <Nav />
+    <div class="page">
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <ul>
+          <li>© {year} {site.author}</li>
+          <li><a href={url("/tags/")}>Tags</a></li>
+          <li><a href={url("/rss.xml")}>RSS</a></li>
+        </ul>
+      </footer>
+    </div>
+    {code && (
+      <script is:inline>
+        // A copy button in every code block's header.
+        for (const block of document.querySelectorAll(".code-block")) {
+          const code = block.querySelector("pre code");
+          if (!code || !navigator.clipboard) continue;
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "code-copy";
+          button.textContent = "Copy";
+          button.addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(code.textContent);
+              button.textContent = "Copied";
+            } catch {
+              button.textContent = "Copy failed";
+            }
+            setTimeout(() => (button.textContent = "Copy"), 1600);
+          });
+          block.querySelector(".code-head").append(button);
+        }
+      </script>
+    )}
+  </body>
+</html>

@@ -1,0 +1,47 @@
+---
+// Every single post, whatever its type: /essays/…, /photos/…, /notes/…,
+// /links/… and /videos/…. The type decides the few parts that differ.
+import { render } from "astro:content";
+import Post from "../../layouts/Post.astro";
+import Photos from "../../components/Photos.astro";
+import Video from "../../components/Video.astro";
+import { getStream, hasTitle, permalink, titleOf, typeLabel, type StreamEntry } from "../../lib/stream";
+
+export async function getStaticPaths() {
+  const stream = await getStream();
+  const link = (item?: StreamEntry) => item && { href: permalink(item), title: titleOf(item) };
+  return stream.map((item) => {
+    const sameType = stream.filter((other) => other.type === item.type);
+    const i = sameType.indexOf(item);
+    return {
+      params: { type: item.type, id: item.entry.id },
+      props: { item, prev: link(sameType[i + 1]), next: link(sameType[i - 1]) },
+    };
+  });
+}
+
+const { item, prev, next } = Astro.props;
+const { data, body } = item.entry;
+const { Content } = await render(item.entry);
+
+const label = item.type === "essays" ? undefined : typeLabel[item.type];
+---
+
+<Post
+  title={titleOf(item)}
+  description={"description" in data ? data.description : undefined}
+  date={data.date}
+  tags={data.tags}
+  type={label}
+  hideTitle={!hasTitle(item)}
+  body={body}
+  prev={prev}
+  next={next}
+>
+  {item.type === "links" && (
+    <p><a class="external" href={item.entry.data.url}>Read it on {new URL(item.entry.data.url).hostname.replace(/^www\./, "")}</a></p>
+  )}
+  {item.type === "videos" && <Video id={item.entry.data.youtube} title={item.entry.data.title} caption={item.entry.data.caption} />}
+  {item.type === "photos" && <Photos photos={item.entry.data.photos} priority />}
+  <Content />
+</Post>

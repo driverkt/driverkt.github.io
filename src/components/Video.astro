@@ -1,0 +1,34 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  caption?: string;
+}
+
+const { id, title, caption } = Astro.props;
+const poster = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+
+<figure class="video wide">
+  <div class="frame" style={`background-image: url(${poster})`} data-youtube={id} data-title={title}>
+    <button class="play" type="button">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" /></svg>
+      Play video
+    </button>
+  </div>
+  <figcaption class="meta">{caption ?? title}</figcaption>
+</figure>
+
+<script>
+  // Load the player only when asked. Before that, the only request is the
+  // thumbnail from YouTube’s image server; the player and its cookies wait.
+  for (const frame of document.querySelectorAll<HTMLElement>("[data-youtube]")) {
+    frame.querySelector("button")?.addEventListener("click", () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${frame.dataset.youtube}?autoplay=1`;
+      iframe.title = frame.dataset.title ?? "Video";
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+      frame.replaceChildren(iframe);
+    }, { once: true });
+  }
+</script>

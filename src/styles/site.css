@@ -1,0 +1,580 @@
+/* ==========================================================================
+   Site styles: layout, components and colour. Unlayered, so they override
+   typeset.css without specificity fights. Typefaces are in fonts.css.
+   ========================================================================== */
+
+@import url("./palettes/nomad-nights.css");
+
+/* --------------------------------------------------------------------------
+   Palette. The colours live in palettes/; swap the @import above to change
+   them. A palette defines --paper, --ink, --muted, --accent (headings) and
+   --link; everything else is mixed from those.
+   -------------------------------------------------------------------------- */
+
+:root {
+  --rule: color-mix(in oklab, var(--ink) 16%, var(--paper));
+  --text: min(33rem, 100% - 2rem); /* the measure, for captions in wide boxes */
+  --wide: min(48em, 100vw - 2em);
+  --tint: color-mix(in oklab, var(--ink) 5%, var(--paper));
+}
+
+h1,
+h2,
+h3,
+.site-nav .home {
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Type
+   -------------------------------------------------------------------------- */
+
+body {
+  /* The measure moves from <body> to .page, so pictures and code can run
+     wider than the text. */
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+}
+
+:not(pre) > code,
+kbd {
+  padding: 0.05em 0.25em;
+  border-radius: 3px;
+  background: color-mix(in oklab, var(--ink) 7%, transparent);
+  -webkit-box-decoration-break: clone; /* stylelint-disable-line property-no-vendor-prefix -- Safari */
+  box-decoration-break: clone;
+}
+
+kbd {
+  box-shadow: inset 0 -1px color-mix(in oklab, var(--ink) 25%, transparent);
+  white-space: nowrap;
+}
+
+pre {
+  padding: 0.857em 1.143em; /* 12px × 16px at 14px: stays on the grid */
+  border-radius: 6px;
+  font-size: 0.875em;
+  line-height: 1.7143;
+  background: var(--tint);
+}
+
+/* Display maths sits on the rhythm like any other block. */
+math[display="block"] {
+  margin: 1.5em 0;
+}
+
+/* Small print: 14px on a 24px line, keeping the rhythm (§2.2.2). */
+.meta,
+.filters,
+.post-nav,
+.contact,
+.site-footer,
+.code-block {
+  font-size: 0.875em;
+  line-height: 1.7143;
+}
+
+.meta,
+.excerpt,
+.domain,
+.role,
+.site-footer {
+  color: var(--muted);
+}
+
+/* Lists used for layout, not as lists of points. */
+:is(.site-nav, .site-footer) ul,
+.stream,
+.filters ul,
+.contact,
+.tag-cloud {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* §2.3.2 indents continuing paragraphs of prose, not lines of an entry. */
+:is(.stream, .intro) p + p {
+  text-indent: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Page frame and breakouts (wider boxes stay in normal flow, so the
+   rhythm’s margin collapsing keeps working)
+   -------------------------------------------------------------------------- */
+
+.page {
+  box-sizing: content-box;
+  max-width: 33em;
+  margin: 0 auto;
+  padding: 3em 1em;
+}
+
+.wide {
+  width: var(--wide);
+  margin-left: calc((100% - var(--wide)) / 2);
+}
+
+.full {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+/* --------------------------------------------------------------------------
+   Navigation: a plain bar that stays at the top, with a hairline rule
+   -------------------------------------------------------------------------- */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+  justify-content: space-between;
+
+  /* Side padding lines the bar's contents up with the text column. */
+  padding: 0.75em max(1em, (100% - 33em) / 2);
+  background: var(--paper);
+
+  /* Fainter than --rule: the bar only needs separating from the page. */
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 9%, var(--paper));
+}
+
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-nav .home {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.site-nav ul {
+  display: flex;
+  gap: 1.25em;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   Meta lines, post headers and footers (after Minrock)
+   -------------------------------------------------------------------------- */
+
+.meta {
+  margin-top: 0;
+}
+
+.meta .type {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.meta a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.meta a:hover {
+  text-decoration: underline;
+}
+
+/* A date that is a permalink reads as metadata, not as a link. */
+.meta a:has(time) {
+  color: inherit;
+}
+
+.meta > * + *::before {
+  content: "·";
+  margin: 0 0.5em;
+}
+
+.tag-list a + a {
+  margin-left: 0.5em;
+}
+
+.post-header {
+  margin-bottom: 3em;
+}
+
+.post-header h1 {
+  margin-bottom: 0;
+}
+
+.post-header .meta {
+  margin-top: 0.5em;
+}
+
+.post-footer {
+  margin-top: 3em;
+}
+
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin: 0;
+}
+
+.post-nav a {
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   Stream (home page, archive, tags)
+   -------------------------------------------------------------------------- */
+
+.stream > li {
+  padding: 1.5em 0 calc(1.5em - 1px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.stream > li:first-child {
+  padding-top: 0;
+}
+
+.stream > li:last-child {
+  border-bottom: 0;
+}
+
+.stream p {
+  margin: 0;
+}
+
+.stream :is(h2, h3) {
+  margin: 0;
+  font-size: 1.125em;
+  line-height: 1.3333;
+  font-style: normal;
+}
+
+.stream :is(h2, h3) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.stream :is(h2, h3) a:hover {
+  color: var(--link);
+}
+
+.stream .note p + p {
+  margin-top: 0.75em;
+}
+
+.external::after {
+  content: "\2009↗";
+  color: var(--muted);
+}
+
+.domain {
+  font-size: 0.875em;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 3em;
+  margin-bottom: 1em;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.section-head a {
+  font-size: 0.875em;
+  text-decoration: none;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1em;
+  margin: 1.5em 0;
+}
+
+.tag-cloud a {
+  text-decoration: none;
+}
+
+.tag-cloud .count {
+  margin-left: 0.15em;
+  font-size: 0.875em;
+  color: var(--muted);
+}
+
+/* Kinds-of-post links above the stream and type indexes. */
+.filters {
+  margin-bottom: 1.5em;
+}
+
+.filters ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1em;
+}
+
+.filters a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.filters a:hover,
+.filters a[aria-current="page"] {
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   Photos: one wide, or a grid of two to six on a six-column track
+   -------------------------------------------------------------------------- */
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.25em;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.photos picture {
+  grid-column: span 2;
+}
+
+.photos[data-count="1"] picture {
+  grid-column: span 6;
+}
+
+.photos:is([data-count="2"], [data-count="4"]) picture,
+.photos[data-count="5"] picture:nth-child(-n + 2) {
+  grid-column: span 3;
+}
+
+.photos img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.photos:not([data-count="1"]) img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   Video: only the thumbnail loads until the reader presses play
+   -------------------------------------------------------------------------- */
+
+.video {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.video .frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #111 center / cover no-repeat;
+  border-radius: 6px;
+}
+
+.video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video .play {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: 0.5em 1.1em 0.5em 0.9em;
+  font: inherit;
+  color: #fff;
+  background: rgb(0 0 0 / 55%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.video .play svg {
+  width: 1em;
+  height: 1em;
+}
+
+.video figcaption {
+  width: var(--text);
+  margin: 0.5em auto 0;
+}
+
+/* --------------------------------------------------------------------------
+   Code blocks: Tokyo Night Storm panel with a file-name or language header
+   -------------------------------------------------------------------------- */
+
+.code-block {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  overflow: hidden;
+  background: #24283b;
+  border: 1px solid #1b1e2e;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px -12px rgb(0 0 0 / 35%);
+}
+
+/* In posts, blocks run up to 80 columns, past the text column. */
+.prose > .code-block {
+  --code: min(80ch, 100vw - 2rem);
+
+  width: var(--code);
+  margin-left: calc((100% - var(--code)) / 2);
+}
+
+.code-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5em 0 1.143em;
+  color: #7982a9;
+  background: #1f2335;
+  border-bottom: 1px solid #1b1e2e;
+}
+
+.code-title {
+  color: #a9b1d6;
+}
+
+.code-block pre {
+  margin: 0;
+  font-size: 1em;
+  border-radius: 0;
+}
+
+.code-copy {
+  padding: 0 0.6em;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.code-copy:hover,
+.code-copy:focus-visible {
+  color: #c0caf5;
+  background: rgb(255 255 255 / 6%);
+}
+
+.code-block ::selection {
+  background: #364a82;
+}
+
+/* --------------------------------------------------------------------------
+   Home (after Astro Scholar)
+   -------------------------------------------------------------------------- */
+
+.intro {
+  display: grid;
+  grid-template-columns: 6em 1fr;
+  gap: 0 1.5em;
+  align-items: start;
+}
+
+.intro img {
+  width: 6em;
+  height: 6em;
+  border-radius: 50%;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: 1.5em;
+  line-height: 1.5;
+}
+
+.intro p {
+  margin-top: 0;
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1em;
+  margin-top: 0.75em;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  margin-top: 4.5em;
+  padding-top: calc(1.5em - 1px);
+  border-top: 1px solid var(--rule);
+}
+
+.site-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1em;
+}
+
+/* --------------------------------------------------------------------------
+   Phones
+   -------------------------------------------------------------------------- */
+
+@media (width < 30em) {
+  .site-nav ul {
+    gap: 1em;
+  }
+
+  .intro {
+    grid-template-columns: 4em 1fr;
+    gap: 0 1em;
+  }
+
+  .intro img {
+    width: 4em;
+    height: 4em;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Print
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .site-nav,
+  .site-footer {
+    display: none;
+  }
+
+  .page {
+    max-width: none;
+    padding: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+}

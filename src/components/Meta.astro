@@ -1,0 +1,24 @@
+---
+import { formatDate, iso, url } from "../lib/format";
+
+interface Props {
+  date: Date;
+  tags?: string[];
+  type?: string;
+  href?: string;
+}
+
+const { date, tags = [], type, href } = Astro.props;
+---
+
+<p class="meta">
+  {type && <span class="type">{type}</span>}
+  {href
+    ? <a href={href}><time datetime={iso(date)}>{formatDate(date)}</time></a>
+    : <time datetime={iso(date)}>{formatDate(date)}</time>}
+  {tags.length > 0 && (
+    <span class="tag-list">
+      {tags.map((tag) => <a href={url(`/tags/${tag}/`)}>#{tag}</a>)}
+    </span>
+  )}
+</p>

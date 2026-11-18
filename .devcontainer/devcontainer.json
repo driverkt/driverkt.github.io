@@ -1,6 +1,0 @@
-{
-	"name": "DevContainer (driverkt)",
-	"build": {
-		"dockerfile": "Dockerfile"
-	}
-}

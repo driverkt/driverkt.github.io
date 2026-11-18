@@ -1,0 +1,20 @@
+---
+title: Dotfiles
+description: Notes on my dotfiles, and the projects they inherit from.
+date: 2025-09-21
+tags: [updates, dotfiles, config]
+draft: true
+---
+
+I’ve been working on my <abbr title="A set of configuration files that one can use to customize one’s shell and applications">dotfiles</abbr> a lot over the past indefinite while. I may do a series of posts about them, especially the most interesting facets of select files.
+
+Though they are by now quite bespoke, I’m certain there will be a few worthwhile tidbits to pass along which are broadly applicable.
+
+Mine inherit from the work of several notable ancestors (in no particular order):
+
+- [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles/)
+- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles/)
+- [pstadler/dotfiles](https://github.com/pstadler/dotfiles/)
+- [jessfraz/dotfiles](https://github.com/jessfraz/dotfiles/)
+
+Watch this space!

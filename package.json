@@ -1,0 +1,21 @@
+{
+  "name": "site",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro build && stylelint \"src/styles/**/*.css\" && html-validate \"dist/**/*.html\""
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "astro": "^7.4.7",
+    "temml": "^0.14.0"
+  },
+  "devDependencies": {
+    "html-validate": "^11.21.0",
+    "stylelint": "^18.0.0",
+    "stylelint-config-standard": "^41.0.0"
+  }
+}

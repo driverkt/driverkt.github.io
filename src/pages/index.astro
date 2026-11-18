@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import StreamItem from "../components/StreamItem.astro";
+import { site } from "../config";
+import { Content as Intro } from "../text/intro.md";
+import { getStream } from "../lib/stream";
+import { url } from "../lib/format";
+
+const stream = (await getStream()).slice(0, 5);
+---
+
+<Base>
+  <section class="intro">
+    <img src={url("/avatar.webp")} alt="" width="96" height="96" />
+    <div>
+      <h1>{site.author}</h1>
+      <p class="role">{site.role}<br />{site.affiliation}</p>
+    </div>
+  </section>
+
+  <Intro />
+  <ul class="contact">
+    {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
+    {site.links.map(({ label, href }) => <li><a href={href} rel="me">{label}</a></li>)}
+    <li><a href="#">CV</a></li>
+  </ul>
+
+  <div class="section-head">
+    <h2>Posts</h2>
+    <a href={url("/posts/")}>All →</a>
+  </div>
+  {stream.length > 0
+    ? <ul class="stream">{stream.map((item) => <StreamItem item={item} heading="h3" />)}</ul>
+    : <p class="meta">Nothing here yet.</p>}
+</Base>

@@ -1,0 +1,23 @@
+---
+import Base from "./Base.astro";
+import PostFilters from "../components/PostFilters.astro";
+import StreamItem from "../components/StreamItem.astro";
+import { getStream, type PostType } from "../lib/stream";
+
+interface Props {
+  title: string;
+  /** Only this kind of post; all kinds when omitted. */
+  type?: PostType;
+}
+
+const { title, type } = Astro.props;
+const stream = (await getStream()).filter((item) => !type || item.type === type);
+---
+
+<Base title={title}>
+  <h1>{title}</h1>
+  <PostFilters current={type} />
+  {stream.length > 0
+    ? <ul class="stream">{stream.map((item) => <StreamItem item={item} />)}</ul>
+    : <p class="meta">Nothing here yet.</p>}
+</Base>

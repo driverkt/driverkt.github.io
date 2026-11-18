@@ -1,0 +1,21 @@
+---
+// A plain page written in Markdown, e.g. src/pages/about.md:
+//   ---
+//   layout: ../layouts/Page.astro
+//   title: About
+//   ---
+import Base from "./Base.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<Base title={frontmatter.title} description={frontmatter.description}>
+  <article>
+    <header class="post-header">
+      <h1>{frontmatter.title}</h1>
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</Base>

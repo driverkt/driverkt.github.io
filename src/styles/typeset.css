@@ -1,0 +1,451 @@
+/*! typeset.css — a typographic reset
+    After Robert Bringhurst, “The Elements of Typographic Style”, as applied
+    to the web by Richard Rutter: https://webtypography.net
+    Reset layer derived from modern-normalize v3.0.1 (MIT, Sindre Sorhus).
+
+    Section numbers in comments (e.g. §2.2.1) point to the matching
+    guideline on webtypography.net. Where the guide gives CSS, it is kept
+    as written unless the guide’s own syntax has since been superseded.
+
+    Everything sits in cascade layers, so any unlayered rule you write
+    overrides it without a specificity fight.
+
+    Colour and type are left to you. Colours come from five custom
+    properties (--ink, --paper, --link, --muted, --rule); unset, they fall
+    back to the browser's own light or dark system colours. The text face
+    defaults to the guide's serif stack; set font-family on body to change
+    it. */
+
+@layer reset, typography;
+
+
+/* ==========================================================================
+   Reset — put Chromium, WebKit and Gecko on the same starting ground.
+   Only rules that correct a real difference between current engines, plus
+   the margins the guide says the designer must always specify (§2.2.2).
+   ========================================================================== */
+
+@layer reset {
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    /* Stop iOS Safari inflating text after orientation changes (WebKit
+       still needs the prefix). */
+    -webkit-text-size-adjust: 100%; /* stylelint-disable-line property-no-vendor-prefix */
+    text-size-adjust: 100%;
+    tab-size: 4;
+  }
+
+  /* §2.2.2 “Browsers insert a top and bottom margin of 1 em [on block
+     elements]. The implication is that margins must always be specified
+     by the designer.” Remove them here; the typography layer sets them. */
+  body,
+  h1, h2, h3, h4, h5, h6,
+  p, blockquote, figure, pre, hr,
+  ul, ol, dl, dd {
+    margin: 0;
+  }
+
+  /* Chromium and WebKit use `bold`, Gecko `bolder`. */
+  b,
+  strong {
+    font-weight: bolder;
+  }
+
+  /* All engines shrink the bare `monospace` keyword to 13px; naming a real
+     font first and resetting the size makes code inherit the text size. */
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 1em;
+  }
+
+  /* Gecko underlines abbr[title] differently from Chromium and WebKit. */
+  abbr[title] {
+    text-decoration: underline dotted;
+  }
+
+  /* Keep sub/sup from pushing lines apart (§2.2.1) in every engine. */
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+
+  sup {
+    top: -0.5em;
+  }
+
+  /* Chromium and WebKit don’t inherit border colour or reset text-indent
+     into tables (which matters here because paragraphs are indented). */
+  table {
+    border-color: currentcolor;
+    text-indent: 0;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Form controls: inherit type in every engine; WebKit and Gecko add
+     margins. (`font: inherit` is avoided so controls keep lining figures.) */
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  legend {
+    padding: 0;
+  }
+
+  progress {
+    vertical-align: baseline;
+  }
+
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  [type="search"] {
+    appearance: textfield;
+    outline-offset: -2px;
+  }
+
+  ::-webkit-search-decoration {
+    appearance: none;
+  }
+
+  /* WebKit doesn’t inherit type into the file-input button. */
+  ::file-selector-button {
+    font: inherit;
+  }
+
+  /* Chromium and WebKit don’t give <summary> its disclosure marker box. */
+  summary {
+    display: list-item;
+  }
+}
+
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+@layer typography {
+  :root {
+    color-scheme: light dark;
+  }
+
+  body {
+    /* §3.1.1 “body { font-size: 100%; }” — respect the reader’s default. */
+    font-size: 100%;
+
+    /* §2.2.1 A unitless line-height stays proportional to the text. */
+    line-height: 1.5;
+    font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+
+    /* §2.1.2 Elastic measure: 33em ≈ 66 characters. */
+    max-width: 33em;
+    margin: 0 auto;
+    padding: 1.5em 1em;
+    box-sizing: content-box;
+    color: var(--ink, CanvasText);
+    background: var(--paper, Canvas);
+
+    /* §2.1.8 Kern consistently: Gecko otherwise skips kerning and
+       ligatures at small sizes. */
+    text-rendering: optimizeLegibility; /* stylelint-disable-line value-keyword-case -- as the guide writes it */
+    font-kerning: normal;
+    font-optical-sizing: auto;
+
+    /* §3.2.1 Text figures in running text. */
+    font-variant-numeric: oldstyle-nums;
+
+    /* §2.1.9, §3.2.2 No faked bold, italic or small caps: “choose a face
+       which includes them, or live without.” */
+    font-synthesis: none;
+
+    /* Match the x-height of fallback and monospace fonts to the text face. */
+    font-size-adjust: from-font;
+  }
+
+
+  /* §2.1.3 Ragged right, §2.4.x hyphenation ------------------------------ */
+
+  p, li, dd, dt, blockquote, figcaption, caption, td, th {
+    text-align: left;
+
+    /* §2.4.5 Hyphenate by the conventions of the language: needs `lang`. */
+    hyphens: auto;
+
+    /* §2.4.1 “hyphenate-before: 2; hyphenate-after: 3;” in today’s syntax. */
+    hyphenate-limit-chars: auto 2 3;
+
+    /* §2.4.3 “hyphenate-lines: 3;” — WebKit only so far. */
+    -webkit-hyphenate-limit-lines: 3;
+    text-wrap: pretty;
+  }
+
+
+  /* §2.2.2 Vertical space in measured intervals -------------------------- */
+
+  /* The guide’s “p { line-height: 1.5; margin-top: 1.5em; margin-bottom:
+     1.5em; }”, combined with §2.3.2’s “p { margin-bottom: 0; }”. */
+  p {
+    margin-top: 1.5em;
+    margin-bottom: 0;
+
+    /* §2.4.8 Never begin a page with the last line of a paragraph. */
+    widows: 2;
+    orphans: 2;
+  }
+
+  ul, ol, dl, pre, figure, table, hr {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+
+  /* §2.3.1 Opening paragraphs flush left; §2.3.2 later ones indented and
+     closed up. For block paragraphs instead, delete this rule. */
+  p + p {
+    text-indent: 1em;
+    margin-top: 0;
+  }
+
+  li > :is(ul, ol) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  dd {
+    margin-left: 1em;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--rule, color-mix(in oklab, currentcolor 20%, transparent));
+    margin-top: calc(1.5em - 1px);
+  }
+
+
+  /* §3.1.1 Scale and §2.2.2 rhythm for headings ---------------------------
+     Sizes from the guide’s classic scale (36, 24, 18, 14 at a 16px default).
+     Each line-height and margin is (multiple of 24px) ÷ heading size, so
+     every heading occupies whole lines of the base rhythm. */
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+
+    /* §3.2.1 Titling figures with full-size type. */
+    font-variant-numeric: lining-nums;
+    text-wrap: balance;
+    break-after: avoid;
+    break-inside: avoid;
+  }
+
+  h1 {
+    font-size: 2.25em;    /* 16×2.25=36 */
+    line-height: 1.3333;  /* 48 */
+    margin-top: 0.6667em; /* 24 */
+    margin-bottom: 0.6667em;
+  }
+
+  h2 {
+    font-size: 1.5em;     /* 16×1.5=24 */
+    line-height: 1.5;     /* 36 */
+    margin-top: 1.5em;    /* 36 */
+    margin-bottom: 1em;   /* 24 */
+  }
+
+  h3 {
+    font-size: 1.125em;   /* 16×1.125=18 */
+    line-height: 1.3333;  /* 24 */
+    margin-top: 1.3333em; /* 24 */
+    margin-bottom: 1.3333em;
+    font-style: italic;
+  }
+
+  h4 {
+    font-size: 0.875em;   /* 16×0.875=14 */
+    line-height: 1.7143;  /* 24 */
+    margin-top: 1.7143em; /* 24 */
+    margin-bottom: 1.7143em;
+    font-style: italic;
+  }
+
+  h5, h6 {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.1em;
+  }
+
+
+  /* Inline text — §2.1.6, §3.2.2 ----------------------------------------- */
+
+  /* §3.2.2 Abbreviations in spaced small caps; §2.1.6 letterspace 5–10%.
+     Type acronyms in capitals; all-small-caps does the rest. */
+  abbr, .caps {
+    font-variant-caps: all-small-caps;
+    font-variant-numeric: oldstyle-nums;
+    font-style: normal;
+    letter-spacing: 0.1em;
+  }
+
+  abbr[title] {
+    text-underline-position: under;
+  }
+
+  em em, cite em, blockquote em {
+    font-style: normal;
+  }
+
+  small {
+    font-size: 0.875em;   /* 14 on the scale */
+  }
+
+  q {
+    quotes: auto;
+  }
+
+  a {
+    color: var(--link, LinkText);
+    text-decoration-thickness: from-font;
+    text-underline-offset: 0.15em;
+  }
+
+  a:visited {
+    color: color-mix(in oklab, var(--link, LinkText) 60%, var(--ink, CanvasText));
+  }
+
+  code, kbd, samp, pre {
+    font-variant-numeric: normal;
+    hyphens: manual;
+  }
+
+  pre {
+    overflow-x: auto;
+  }
+
+
+  /* §2.3.3 Block quotations, §2.3.4 verse -------------------------------- */
+
+  /* “Left and right margins equal to the top and bottom” — and to the
+     line-height, so the rhythm survives. */
+  blockquote {
+    margin: 1.5em;
+    font-style: italic;
+  }
+
+  blockquote > :last-child {
+    margin-bottom: 0;
+  }
+
+  figure > blockquote {
+    margin-bottom: 0;
+  }
+
+  /* <blockquote class="verse"><pre>…</pre></blockquote> */
+  .verse pre {
+    font-family: inherit;
+    display: table;
+    width: auto;
+    margin: 0 auto;
+  }
+
+
+  /* Tables and captions ----------------------------------------------------
+     §3.2.1 Lining figures in tables; tabular so columns align. */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  th, td {
+    text-align: left;
+    vertical-align: baseline;
+    padding: 0 0.5em;
+
+    /* A rule drawn as a shadow takes no height, so rows stay on the 24px
+       line (§2.2.2). A border would add a pixel per row. */
+    box-shadow: inset 0 -1px var(--rule, color-mix(in oklab, currentcolor 20%, transparent));
+    hyphens: manual;
+  }
+
+  th {
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  th:first-child, td:first-child {
+    padding-left: 0;
+  }
+
+  th:last-child, td:last-child {
+    padding-right: 0;
+  }
+
+  .num {
+    text-align: right;
+  }
+
+  /* §2.2.2 Smaller text keeps the 24px line: 24 ÷ 14 = 1.7143. */
+  caption, figcaption {
+    font-size: 0.875em;
+    line-height: 1.7143;
+    color: var(--muted, GrayText);
+    caption-side: bottom;
+  }
+
+  /* Attribution lines up with the quotation it belongs to. */
+  figure > blockquote + figcaption {
+    margin-left: 1.5em;
+  }
+
+
+  /* §2.4.8 Pagination ----------------------------------------------------- */
+
+  @media print {
+    :root {
+      color-scheme: light;
+    }
+
+    /* §3.1.1 “For text which is to be printed … set text in points.” */
+    body {
+      font-size: 11pt;
+      max-width: none;
+      padding: 0;
+    }
+
+    pre, blockquote, figure, table, tr {
+      break-inside: avoid;
+    }
+  }
+}

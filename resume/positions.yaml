@@ -1,0 +1,62 @@
+# Your positions, newest first or in any order (they're sorted by start date).
+# Only the years are shown. See examples/cv/entries.yaml for every field.
+- id: ibm-2026
+  role: Cryptography and Key Management, Vault Arc
+  org: IBM
+  start: 2026-05-01
+
+- id: wells-fargo
+  role: Lead Information Security Engineer (VP)
+  org: Wells Fargo
+  start: 2026-01-01
+  end: 2026-04-30
+  summary: Technical lead for an enterprise-wide secrets and key management programme in the CTO’s organisation.
+
+- id: oracle
+  role: Senior Principal Engineer
+  org: Oracle
+  start: 2022-01-01
+  end: 2025-12-31
+  summary: Led JEP 478, the Key Derivation Function API, for Java’s post-quantum transition; contributed to the PEM encoding and decoding API.
+
+- id: apple-crypto-services
+  role: Crypto Services Senior Engineer
+  org: Apple
+  start: 2021-06-01
+  end: 2022-05-31
+  summary: Secrets management as a service and PKI.
+
+- id: apple-pay
+  role: Apple Pay Senior Engineer
+  org: Apple
+  start: 2020-06-01
+  end: 2021-05-31
+  summary: Payment method tokenisation for Apple Wallet.
+
+- id: apple-pos
+  role: Point of Sale Crypto and Key Management Architect
+  org: Apple
+  start: 2018-01-01
+  end: 2020-05-31
+  summary: Designed the cryptography and key management for the next generation of Apple’s point-of-sale security; instrumental in an organisation-wide PCI certification.
+
+- id: ibm-2014
+  role: Cryptography and Key Management Architect
+  org: IBM
+  start: 2014-01-01
+  end: 2018-01-01
+  summary: Architect for Java security and cryptography; technical lead and architect for IBM Key Protect.
+
+- id: paypal
+  role: Security Architecture and Engineering
+  org: PayPal
+  start: 2012-01-01
+  end: 2014-01-01
+  summary: "Security architecture for the move to a new development stack; internal JCE provider, PKCS #12 KeyStore, and XACML-backed token authorisation."
+
+- id: ibm-2003
+  role: Advisory Software Engineer
+  org: IBM
+  start: 2003-06-01
+  end: 2012-01-01
+  summary: Technical lead for the IBM Java Cryptography Extension and its FIPS certifications; JCP work on JSR 105 and 106.

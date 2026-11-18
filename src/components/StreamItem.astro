@@ -1,0 +1,62 @@
+---
+import { render } from "astro:content";
+import Meta from "./Meta.astro";
+import Photos from "./Photos.astro";
+import { permalink, typeLabel, type StreamEntry } from "../lib/stream";
+import { url } from "../lib/format";
+import { typesetText } from "../lib/rehype-typeset.mjs";
+
+interface Props {
+  item: StreamEntry;
+  heading?: "h2" | "h3";
+}
+
+const { item, heading: H = "h2" } = Astro.props;
+const href = url(permalink(item));
+const { data } = item.entry;
+// Photos, notes and links show their (short) body in the stream.
+const { Content } = item.type === "photos" || item.type === "notes" || item.type === "links" ? await render(item.entry) : { Content: null };
+---
+
+<li>
+  {item.type === "essays" && (
+    <article>
+      <Meta date={data.date} tags={data.tags} type={typeLabel.essays} />
+      <H><a href={href}>{typesetText(item.entry.data.title)}</a></H>
+      <p class="excerpt">{typesetText(item.entry.data.description)}</p>
+    </article>
+  )}
+
+  {item.type === "photos" && Content && (
+    <article>
+      <Meta date={data.date} tags={data.tags} type={typeLabel.photos} href={href} />
+      {item.entry.data.title && <H><a href={href}>{item.entry.data.title}</a></H>}
+      <a href={href}><Photos photos={item.entry.data.photos} /></a>
+      <div class="note"><Content /></div>
+    </article>
+  )}
+
+  {item.type === "notes" && Content && (
+    <article>
+      <Meta date={data.date} tags={data.tags} type={typeLabel.notes} href={href} />
+      <div class="note"><Content /></div>
+    </article>
+  )}
+
+  {item.type === "links" && Content && (
+    <article>
+      <Meta date={data.date} tags={data.tags} type={typeLabel.links} href={href} />
+      <H><a class="external" href={item.entry.data.url}>{item.entry.data.title}</a></H>
+      <p class="domain">{new URL(item.entry.data.url).hostname.replace(/^www\./, "")}</p>
+      <div class="note"><Content /></div>
+    </article>
+  )}
+
+  {item.type === "videos" && (
+    <article>
+      <Meta date={data.date} tags={data.tags} type={typeLabel.videos} />
+      <H><a href={href}>{item.entry.data.title}</a></H>
+      {item.entry.data.caption && <p class="excerpt">{item.entry.data.caption}</p>}
+    </article>
+  )}
+</li>

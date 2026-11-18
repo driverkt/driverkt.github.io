@@ -1,0 +1,26 @@
+---
+import { url } from "../lib/format";
+import type { PostType } from "../lib/stream";
+
+interface Props {
+  current?: PostType;
+}
+
+const { current } = Astro.props;
+const links: [PostType | undefined, string, string][] = [
+  [undefined, "All", "/posts/"],
+  ["essays", "Essays", "/essays/"],
+  ["photos", "Photos", "/photos/"],
+  ["notes", "Notes", "/notes/"],
+  ["links", "Links", "/links/"],
+  ["videos", "Videos", "/videos/"],
+];
+---
+
+<nav class="filters" aria-label="Kinds of post">
+  <ul>
+    {links.map(([type, label, href]) => (
+      <li><a href={url(href)} aria-current={type === current ? "page" : undefined}>{label}</a></li>
+    ))}
+  </ul>
+</nav>

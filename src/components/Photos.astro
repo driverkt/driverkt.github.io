@@ -1,0 +1,29 @@
+---
+// One to six photos. One runs a little wider than the text; two to six
+// share a simple grid (2 · 3 · 2×2 · 2 + 3 · 3×2), cropped to the same shape.
+import { Picture } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  photos: CollectionEntry<"photos">["data"]["photos"];
+  /** The page's main image: load it first. */
+  priority?: boolean;
+}
+
+const { photos, priority = false } = Astro.props;
+const single = photos.length === 1;
+---
+
+<div class:list={["photos", { wide: single }]} data-count={photos.length}>
+  {photos.map((photo, i) => (
+    <Picture
+      src={photo.src}
+      alt={photo.alt}
+      formats={["avif", "webp"]}
+      widths={single ? [800, 1200, 1600] : [400, 800]}
+      sizes={single ? "min(48em, 100vw)" : "min(17em, 50vw)"}
+      loading={priority && i === 0 ? "eager" : "lazy"}
+      fetchpriority={priority && i === 0 ? "high" : "auto"}
+    />
+  ))}
+</div>

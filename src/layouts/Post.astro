@@ -1,0 +1,42 @@
+---
+import Base from "./Base.astro";
+import Meta from "../components/Meta.astro";
+import { url } from "../lib/format";
+import { typesetText } from "../lib/rehype-typeset.mjs";
+
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  tags?: string[];
+  type?: string;
+  hideTitle?: boolean;
+  /** The post's Markdown source, to tell whether it contains code. */
+  body?: string;
+  prev?: { href: string; title: string };
+  next?: { href: string; title: string };
+}
+
+const { title, description, date, tags, type, hideTitle = false, body = "", prev, next } = Astro.props;
+const code = /`|<(code|kbd|samp|pre)\b/.test(body);
+---
+
+<Base title={title} description={description} code={code}>
+  <article>
+    <header class="post-header">
+      {hideTitle ? <h1 class="visually-hidden">{title}</h1> : <h1>{typesetText(title)}</h1>}
+      <Meta date={date} tags={tags} type={type} />
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+    {(prev || next) && (
+      <footer class="post-footer">
+        <nav class="post-nav" aria-label="More posts">
+          <span>{prev && <a href={url(prev.href)} rel="prev">← {prev.title}</a>}</span>
+          <span>{next && <a href={url(next.href)} rel="next">{next.title} →</a>}</span>
+        </nav>
+      </footer>
+    )}
+  </article>
+</Base>

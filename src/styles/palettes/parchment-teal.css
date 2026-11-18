@@ -1,0 +1,14 @@
+/* Parchment and teal: the earlier palette, kept for reference.
+   Two hues; lightness solved for contrast against the page
+   (text 16:1, muted 5.5:1, headings 12.5:1, links 7:1 in light mode;
+   the two accent steps swap in dark mode). */
+
+:root {
+  --hue-neutral: 80; /* parchment */
+  --hue-accent: 195; /* teal */
+  --paper: light-dark(oklch(98.5% 0.008 var(--hue-neutral)), oklch(18.5% 0.012 var(--hue-accent)));
+  --ink: light-dark(oklch(23.4% 0.010 var(--hue-neutral)), oklch(94.9% 0.010 var(--hue-neutral)));
+  --muted: light-dark(oklch(51.0% 0.010 var(--hue-neutral)), oklch(63.9% 0.010 var(--hue-neutral)));
+  --accent: light-dark(oklch(30.6% 0.052 var(--hue-accent)), oklch(68.8% 0.116 var(--hue-accent)));
+  --link: light-dark(oklch(44.5% 0.076 var(--hue-accent)), oklch(86.2% 0.060 var(--hue-accent)));
+}

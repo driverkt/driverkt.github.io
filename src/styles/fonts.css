@@ -1,0 +1,96 @@
+/* ==========================================================================
+   Fonts
+   MonoLisa Text (proportional) for prose, MonoLisa Code for code.
+   Variable: weight 1–1000 and grade (GRAD) −50…50, with true italics.
+
+   The fonts themselves are MonoLisa's "inline CSS" downloads, kept as
+   public/fonts/monolisa-text.css and monolisa-code.css (minified with
+   scripts/minify-font-css.py). Base.astro loads them without blocking the
+   page; the Code file only on pages whose content contains code.
+
+   Everything MonoLisa-specific lives here: swap this file to change the
+   type without touching typeset.css or site.css.
+   ========================================================================== */
+
+:root {
+  --grad: 0; /* MonoLisa's grade axis (GRAD) */
+}
+
+/* Light text on a dark page looks heavier; thin it slightly. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --grad: -25;
+  }
+}
+
+body {
+  font-family: MonoLisaText, "MonoLisaText Fallback", system-ui, sans-serif;
+
+  /* typeset.css matches fallback x-heights with font-size-adjust; that
+     would undo the size-adjust that makes "MonoLisaText Fallback" take
+     MonoLisa's space (below). MonoLisa Text and Code share an x-height,
+     so nothing is lost. */
+  font-size-adjust: none;
+
+  /* Letterforms only. Figures (onum, lnum, tnum, frac) are set per element
+     with font-variant-numeric, so tables and headings can differ from text.
+     (MonoLisa Text has no ss08; ss04 is upright-only.) */
+  font-feature-settings: "ss02", "ss04", "ss14";
+  font-variation-settings: "GRAD" var(--grad);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: MonoLisaCode, "MonoLisaCode Fallback", "MonoLisaCode Fallback Consolas", ui-monospace, monospace;
+  font-variant-ligatures: common-ligatures contextual discretionary-ligatures;
+  font-feature-settings: "ss02", "ss04", "ss08", "ss13", "ss14", "cv01", "cv02", "cv04", "cv05", "cv07", "cv08", "cv09";
+  font-variation-settings: "GRAD" var(--grad);
+}
+
+/* No small caps in MonoLisa: full capitals, lightly tracked (§2.1.6). */
+abbr,
+.caps {
+  letter-spacing: 0.05em;
+}
+
+/* Metric-matched fallbacks. Until MonoLisa arrives, a local system font is
+   scaled to take the same space, so text doesn't re-wrap and jump when the
+   real font swaps in. size-adjust = MonoLisa's width ÷ the fallback's:
+   for Text, measured over this site's own prose (Arial, its metric twins
+   and Roboto are within 0.6% of one another); for Code, the advance width
+   (Menlo, DejaVu Sans Mono and friends are 0.600–0.602 em against
+   MonoLisa Code's 0.640; Consolas is narrower). */
+@font-face {
+  font-family: "MonoLisaText Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"), local("Roboto"), local("Roboto-Regular");
+  size-adjust: 112.4%;
+}
+
+@font-face {
+  font-family: "MonoLisaCode Fallback";
+  src: local("Menlo Regular"), local("Menlo-Regular"), local("DejaVu Sans Mono"), local("Liberation Mono"), local("Roboto Mono Regular"), local("RobotoMono-Regular"), local("Droid Sans Mono");
+  size-adjust: 106.4%;
+}
+
+@font-face {
+  font-family: "MonoLisaCode Fallback Consolas";
+  src: local("Consolas");
+  size-adjust: 116.4%;
+}
+
+/* Biblical-language quotations get dedicated text faces (install or
+   self-host SBL Greek / SBL Hebrew to use them). */
+:lang(grc) {
+  font-family: "SBL Greek", "Gentium Plus", "DejaVu Serif", serif;
+}
+
+:lang(he),
+:lang(hbo) {
+  font-family: "SBL Hebrew", "Noto Serif Hebrew", "DejaVu Sans", serif;
+}
+
+math {
+  font-family: "STIX Two Math", math;
+}

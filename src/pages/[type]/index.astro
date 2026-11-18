@@ -1,0 +1,14 @@
+---
+// The list page for each kind of post.
+import StreamPage from "../../layouts/StreamPage.astro";
+import type { PostType } from "../../lib/stream";
+
+export function getStaticPaths() {
+  const titles: Record<PostType, string> = { essays: "Essays", photos: "Photos", notes: "Notes", links: "Links", videos: "Videos" };
+  return Object.entries(titles).map(([type, title]) => ({ params: { type }, props: { title, type: type as PostType } }));
+}
+
+const { title, type } = Astro.props;
+---
+
+<StreamPage title={title} type={type} />

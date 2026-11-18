@@ -1,0 +1,17 @@
+---
+import { site } from "../config";
+import { url } from "../lib/format";
+
+const path = Astro.url.pathname;
+const current = (href: string, also: string[] = []) =>
+  [href, ...also].some((prefix) => path.startsWith(url(prefix))) ? "page" : undefined;
+---
+
+<nav class="site-nav" aria-label="Main">
+  <a class="home" href={url("/")}>{site.title}</a>
+  <ul>
+    {site.nav.map((item) => (
+      <li><a href={url(item.href)} aria-current={current(item.href, "also" in item ? item.also : [])}>{item.label}</a></li>
+    ))}
+  </ul>
+</nav>

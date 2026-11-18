@@ -1,0 +1,25 @@
+---
+import Base from "../../layouts/Base.astro";
+import StreamItem from "../../components/StreamItem.astro";
+import { getStream, getTags } from "../../lib/stream";
+import { url } from "../../lib/format";
+
+export async function getStaticPaths() {
+  const stream = await getStream();
+  return (await getTags()).map(([tag]) => ({
+    params: { tag },
+    props: { items: stream.filter(({ entry }) => entry.data.tags.includes(tag)) },
+  }));
+}
+
+const { tag } = Astro.params;
+const { items } = Astro.props;
+---
+
+<Base title={`#${tag}`}>
+  <h1>#{tag}</h1>
+  <p class="meta"><span>{items.length} {items.length === 1 ? "post" : "posts"}</span><a href={url("/tags/")}>All tags</a></p>
+  <ul class="stream">
+    {items.map((item) => <StreamItem item={item} />)}
+  </ul>
+</Base>

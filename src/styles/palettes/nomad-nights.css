@@ -1,0 +1,21 @@
+/* Nomad Nights, from colorschemer.com/schemes/nomad-nights
+   (#4e89ae steel blue, #ed6663 coral, #ffa372 orange, #eee5e9 blush white).
+
+   Each colour keeps its swatch's hue and chroma; only lightness was solved
+   to hit a contrast against the page (WCAG; 4.5:1 is the minimum for text):
+   text 13:1, headings 6:1, muted 5.5:1, links 4.6:1 in light mode.
+   The light page is the steel blue's complement (hue + 180°), a faint tan.
+   Dark mode uses the palette's own swatches on a navy page of the same blue. */
+
+:root {
+  --hue-blue: 237.8; /* steel blue: headings, text, the dark page */
+  --hue-paper: calc(var(--hue-blue) - 180); /* its complement, tan */
+  --hue-coral: 23.9; /* links, light mode */
+  --hue-orange: 48.3; /* links, dark mode */
+  --hue-blush: 348.4; /* text, dark mode */
+  --paper: light-dark(oklch(98.2% 0.008 var(--hue-paper)), oklch(20.9% 0.029 var(--hue-blue)));
+  --ink: light-dark(oklch(29.7% 0.030 var(--hue-blue)), oklch(93.0% 0.011 var(--hue-blush)));
+  --muted: light-dark(oklch(50.7% 0.020 var(--hue-blue)), oklch(65.2% 0.012 var(--hue-blush)));
+  --accent: light-dark(oklch(48.4% 0.084 var(--hue-blue)), oklch(67.0% 0.084 var(--hue-blue)));
+  --link: light-dark(oklch(57.0% 0.168 var(--hue-coral)), oklch(79.8% 0.127 var(--hue-orange)));
+}
