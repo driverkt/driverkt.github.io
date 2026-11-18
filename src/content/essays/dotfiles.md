@@ -6,9 +6,9 @@ tags: [updates, dotfiles, config]
 draft: true
 ---
 
-I’ve been working on my <abbr title="A set of configuration files that one can use to customize one’s shell and applications">dotfiles</abbr> a lot over the past indefinite while. I may do a series of posts about them, especially the most interesting facets of select files.
+I've been working on my <abbr title="A set of configuration files that one can use to customize one's shell and applications">dotfiles</abbr> a lot over the past indefinite while. I may do a series of posts about them, especially the most interesting facets of select files.
 
-Though they are by now quite bespoke, I’m certain there will be a few worthwhile tidbits to pass along which are broadly applicable.
+Though they are by now quite bespoke, I'm certain there will be a few worthwhile tidbits to pass along which are broadly applicable.
 
 Mine inherit from the work of several notable ancestors (in no particular order):
 

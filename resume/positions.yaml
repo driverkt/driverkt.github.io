@@ -10,14 +10,14 @@
   org: Wells Fargo
   start: 2026-01-01
   end: 2026-04-30
-  summary: Technical lead for an enterprise-wide secrets and key management programme in the CTO’s organisation.
+  summary: Technical lead for an enterprise-wide secrets and key management programme in the CTO's organisation.
 
 - id: oracle
   role: Senior Principal Engineer
   org: Oracle
   start: 2022-01-01
   end: 2025-12-31
-  summary: Led JEP 478, the Key Derivation Function API, for Java’s post-quantum transition; contributed to the PEM encoding and decoding API.
+  summary: Led JEP 478, the Key Derivation Function API, for Java's post-quantum transition; contributed to the PEM encoding and decoding API.
 
 - id: apple-crypto-services
   role: Crypto Services Senior Engineer
@@ -38,7 +38,7 @@
   org: Apple
   start: 2018-01-01
   end: 2020-05-31
-  summary: Designed the cryptography and key management for the next generation of Apple’s point-of-sale security; instrumental in an organisation-wide PCI certification.
+  summary: Designed the cryptography and key management for the next generation of Apple's point-of-sale security; instrumental in an organisation-wide PCI certification.
 
 - id: ibm-2014
   role: Cryptography and Key Management Architect

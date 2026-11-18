@@ -4,7 +4,7 @@ title: About
 description: Kevin Driver is a security architect who has spent more than twenty years on cryptography, key management and the systems around them.
 ---
 
-I'm Kevin Driver, a security architect and engineer. For more than twenty years I've worked on cryptography, key management, payments, and the systems around them while helping develop my fellow engineers. I’m as happy writing a greenfield cryptographic library as I am decomposing a monolith into secure microservices.
+I'm Kevin Driver, a security architect and engineer. For more than twenty years I've worked on cryptography, key management, payments, and the systems around them while helping develop my fellow engineers. I'm as happy writing a greenfield cryptographic library as I am decomposing a monolith into secure microservices.
 
 ## Education
 
@@ -16,7 +16,7 @@ I'm Kevin Driver, a security architect and engineer. For more than twenty years 
 Cryptography (including, but not limited to, post-quantum migration), key management, security, and privacy; PCI and payment security; natural language processing.
 
 - Patent: [US7499550B2: System and method for protecting a title key in a secure distribution system for recordable media content](https://patents.google.com/patent/US7499550B2/), also granted in China.
-- Paper: *Natural Language Processing for First Order Logic Problems*, a novel application of MIT’s [Alloy modeling language](https://www.csail.mit.edu/research/alloy).
+- Paper: *Natural Language Processing for First Order Logic Problems*, a novel application of MIT's [Alloy modeling language](https://www.csail.mit.edu/research/alloy).
 
 ## Personal Interests
 
@@ -38,12 +38,12 @@ Some years ago, I was an active endurance athlete. In 2008 and 2009 I raced tria
 | 26 Jul | Cougar Country Classic | 5 km | 23:50 |
 | 19 Jul | Vineman 70.3 | 70.3 mi | 6:54:54 |
 | 10 May | The Rookie Triathlon | Sprint | 1:04:19 |
-| 26 Apr | Champion’s Triathlon | Olympic | 3:09:27 |
+| 26 Apr | Champion's Triathlon | Olympic | 3:09:27 |
 
 #### 2008
 
 | Date | Race | Distance | Time |
 | :-- | :-- | :-- | --: |
 | 1 Sep | Austin Triathlon | Olympic | 3:01:59 |
-| 3 Aug | Jack’s Generic Triathlon | Sprint | 1:34:58 |
+| 3 Aug | Jack's Generic Triathlon | Sprint | 1:34:58 |
 | 13 Jul | Couples Triathlon | Sprint | 1:45:49 |

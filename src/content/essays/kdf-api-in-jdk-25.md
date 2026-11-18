@@ -1,6 +1,6 @@
 ---
 title: KDF API in JDK 25
-description: The Key Derivation Function API joins the rest of Java’s cryptography APIs in JDK 25, another building block for post-quantum cryptography.
+description: The Key Derivation Function API joins the rest of Java's cryptography APIs in JDK 25, another building block for post-quantum cryptography.
 date: 2025-09-06
 tags: [java, professional]
 ---

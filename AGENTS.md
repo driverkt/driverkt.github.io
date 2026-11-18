@@ -119,6 +119,11 @@ These are the parts most likely to need porting on an Astro upgrade.
   page ("Posts", latest five), `/posts/` (with type filters), per-type
   pages and tags. Untitled posts get "Note, 6 Sept 2025"-style titles.
 - `draft: true` shows in `npm run dev` and is left out of builds.
+- Write straight quotes and apostrophes in content. The Markdown processor
+  curls them in Markdown bodies; front matter (`title`, `description`),
+  HTML attributes and `src/config.ts` show them straight, which is
+  accepted. The one exception is `’n’` (as in rock ’n’ roll): type it
+  curly, or it renders as a quoted letter (‘n’).
 - `examples/` has one annotated example per type; it isn't built.
 
 ## Decisions to respect
@@ -133,7 +138,7 @@ These are the parts most likely to need porting on an Astro upgrade.
   "Currently" or "Upcoming" sections.
 - Don't bring in more of the owner's old Tumblr theme (e.g. its polaroid,
   tilted photo frames) without asking.
-- Hosting stays on GitHub Pages (The `driverkt.github.io`, deployed by
+- Hosting stays on GitHub Pages (`driverkt.github.io`, deployed by
   `.github/workflows/deploy.yml`). `site` in `astro.config.mjs` changes
   when a custom domain is chosen.
 
