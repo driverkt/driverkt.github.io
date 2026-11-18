@@ -122,14 +122,15 @@ These are the parts most likely to need porting on an Astro upgrade.
 - Write straight quotes and apostrophes in content. The Markdown processor
   curls them in Markdown bodies; front matter (`title`, `description`),
   HTML attributes and `src/config.ts` show them straight, which is
-  accepted. The one exception is `’n’` (as in rock ’n’ roll): type it
-  curly, or it renders as a quoted letter (‘n’).
+  accepted. The one exception is rock 'n' roll-style `'n'`: write it
+  as `&rsquo;n&rsquo;`, or it renders as a quoted letter (‘n’).
 - `examples/` has one annotated example per type; it isn't built.
 
 ## Decisions to respect
 
-- **No web CV** for now. The CV links (menu in `src/config.ts`, home page
-  in `src/pages/index.astro`) point at `#` until a résumé PDF exists.
+- **No web CV** for now. The menu's CV link (`src/config.ts`) points at
+  `#` until a résumé PDF exists; the home-page one is commented out in
+  `src/pages/index.astro`, ready to restore.
   `resume/` keeps the career data (positions, education, publications)
   outside the build, ready for a résumé, possibly in Typst. The
   publications page and all CV collections were removed on purpose.

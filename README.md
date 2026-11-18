@@ -45,10 +45,10 @@ around acronyms at build time; wrap anything to leave alone in
 
 ## CV
 
-There's no web CV for now. The CV links (menu and home page) point at `#`;
-set the menu one in `src/config.ts` and the home-page one in
-`src/pages/index.astro` to a résumé PDF when there is one (a file in
-`public/`, say `public/resume.pdf`, is served at `/resume.pdf`).
+There's no web CV for now. The CV link in the menu points at `#`; set it
+in `src/config.ts` to a résumé PDF when there is one (a file in `public/`,
+say `public/resume.pdf`, is served at `/resume.pdf`). A matching home-page
+link is commented out in `src/pages/index.astro`, ready to restore.
 
 `resume/` keeps the career data (positions, education, publications) for
 that résumé. It isn't part of the site build.

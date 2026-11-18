@@ -28,13 +28,13 @@ Some years ago, I was an active endurance athlete. In 2008 and 2009 I raced tria
 
 | Date | Race | Distance | Time |
 | :-- | :-- | :-- | --: |
-| 15 Nov | San Antonio Rock ’n’ Roll Half Marathon | 13.1 mi | 2:08:58 |
+| 15 Nov | San Antonio Rock &rsquo;n&rsquo; Roll Half Marathon | 13.1 mi | 2:08:58 |
 | 8 Nov | Run for the Water | 10 mi | 1:31:35 |
 | 25 Oct | Longhorn 70.3 | 70.3 mi | 6:33:11 |
 | 19 Sep | Redman 70.3 | 70.3 mi | 6:09:36 |
 | 7 Sep | Austin Triathlon | Olympic | 2:48:06 |
 | 4 Sep | Zilker Relays | 2.5 mi | 18:17.54 |
-| 18 Aug | Splash ’n’ Dash | 750 m + 3 km | 29:56 |
+| 18 Aug | Splash &rsquo;n&rsquo; Dash | 750 m + 3 km | 29:56 |
 | 26 Jul | Cougar Country Classic | 5 km | 23:50 |
 | 19 Jul | Vineman 70.3 | 70.3 mi | 6:54:54 |
 | 10 May | The Rookie Triathlon | Sprint | 1:04:19 |
