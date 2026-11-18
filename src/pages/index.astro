@@ -22,7 +22,7 @@ const stream = (await getStream()).slice(0, 5);
   <ul class="contact">
     {site.email && <li><a href={`mailto:${site.email}`}>{site.email}</a></li>}
     {site.links.map(({ label, href }) => <li><a href={href} rel="me">{label}</a></li>)}
-    <li><a href="#">CV</a></li>
+    <!-- <li><a href="#">CV</a></li> -->
   </ul>
 
   <div class="section-head">
