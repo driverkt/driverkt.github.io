@@ -1,6 +1,6 @@
 # Notebook
 
-Kevin Driver's site: an Astro 7 static blog, typeset after
+[driverkt](https://github.com/driverkt)'s site: an Astro 7 static blog, typeset after
 [The Elements of Typographic Style Applied to the Web](https://webtypography.net/).
 `AGENTS.md` explains how it's built and why; this file is how to use it.
 
